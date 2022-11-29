@@ -3,9 +3,10 @@
 		<title>Login - JSP</title>
 	</head>
 	<body>
+	    <div class="container">
 		<div>Welcome to in28minutes. This is your home page.</div>
-		<div>You are ${name}</div>
-		<div>Your password is ${password}</div>
+		<a href="/list-todos"> Manage your todos</a>
+		</div>
 	</body>
 
 </html>

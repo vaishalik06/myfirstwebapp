@@ -12,7 +12,7 @@ public class AuthenticationService {
     }
 
     public boolean checkPassword(String password){
-        if(password.equalsIgnoreCase("password"))
+        if(password.equalsIgnoreCase("ab"))
             return true;
         return false;
     }
