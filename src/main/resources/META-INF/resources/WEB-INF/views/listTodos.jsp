@@ -1,19 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-	<head>
-	<link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" >
-    <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
-		<title>ToDos</title>
-	</head>
-	<body>
+<body>
+<%@ include file="common/navigation.jspf"%>
+<%@ include file="common/header.jspf"%>
 	<div class="container">
-	  <div>Welcome ${name}</div>
-     <h1>Your Todos</h1>
+	  <h2>Welcome ${name}</h2>
+     <h3>Your Todos</h3>
      			<table class="table">
      				<thead>
      					<tr>
-     						<th>id</th>
      						<th>Description</th>
      						<th>Target Date</th>
      						<th>Is Done?</th>
@@ -22,11 +15,11 @@
      				<tbody>
      					<c:forEach items="${todos}" var="todo">
      						<tr>
-     							<td>${todo.id}</td>
      							<td>${todo.description}</td>
      							<td>${todo.targetDate}</td>
      							<td>${todo.complete}</td>
      							<td><a href="delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a></td>
+     							<td> <a href="update-todo?id=${todo.id}" class="btn btn-success">Update</a></td>
      						</tr>
      					</c:forEach>
      				</tbody>

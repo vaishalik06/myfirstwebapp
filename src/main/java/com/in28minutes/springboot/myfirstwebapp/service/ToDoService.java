@@ -12,25 +12,38 @@ import java.util.function.Predicate;
 @Component
 public class ToDoService {
     private static List<ToDo> toDoList = new ArrayList<>();
-    private static int todosCount=0;
+    private static int todosCount = 0;
 
     static {
-        toDoList.add(new ToDo(++todosCount, "in28minutes","Learn AWS",
-                LocalDate.now().plusYears(1), false ));
-        toDoList.add(new ToDo(++todosCount, "in28minutes","Learn DevOps",
-                LocalDate.now().plusYears(2), false ));
-        toDoList.add(new ToDo(++todosCount, "in28minutes","Learn Full Stack Development",
-                LocalDate.now().plusYears(3), false ));
+        toDoList.add(new ToDo(++todosCount, "in28minutes", "Learn AWS",
+                LocalDate.now().plusYears(1), false));
+        toDoList.add(new ToDo(++todosCount, "in28minutes", "Learn DevOps",
+                LocalDate.now().plusYears(2), false));
+        toDoList.add(new ToDo(++todosCount, "in28minutes", "Learn Full Stack Development",
+                LocalDate.now().plusYears(3), false));
     }
 
     public void addToDo(String name, String description, LocalDate targetDate, boolean complete) {
         toDoList.add(new ToDo(++todosCount, name, description, targetDate, complete));
     }
+
     public List<ToDo> findToDoByUserName(String name) {
         return toDoList;
     }
-    public void deleteTodoById(int id){
+
+    public void deleteTodoById(int id) {
         Predicate<? super ToDo> predicate = todo -> todo.getId() == id;
         toDoList.removeIf(predicate);
+    }
+
+    public ToDo findToDoById(int id) {
+        Predicate<? super ToDo> predicate = todo -> todo.getId() == id;
+        ToDo toDo = toDoList.stream().filter(predicate).findFirst().get();
+        return toDo;
+    }
+
+    public void updateTodo(ToDo toDo) {
+        toDoList.get(toDo.getId()-1).setDescription(toDo.getDescription());
+        toDoList.get(toDo.getId()-1).setTargetDate(toDo.getTargetDate());
     }
 }

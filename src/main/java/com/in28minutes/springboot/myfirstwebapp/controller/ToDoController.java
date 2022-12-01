@@ -65,18 +65,34 @@ public class ToDoController {
     public String addNewToDo(@Valid @ModelAttribute("todo") ToDo toDo, BindingResult result, ModelMap modelMap) {
         LOGGER.info(String.valueOf(result));
         if (result.hasErrors()) {
-            LOGGER.info("Error occurred in todo bean");
             return "todo";
         }
-        LOGGER.info("Outside if-error block");
         String username = (String) modelMap.get("name");
         toDoService.addToDo("username", toDo.getDescription(), toDo.getTargetDate(), false);
         return "redirect:list-todos";
     }
 
     @GetMapping("delete-todo")
-    public String deleteToDoById(@RequestParam int id){
+    public String deleteToDoById(@RequestParam int id) {
         toDoService.deleteTodoById(id);
+        return "redirect:list-todos";
+    }
+
+    @GetMapping("update-todo")
+    public String showUpdateToDoPage(@RequestParam int id,ModelMap modelMap) {
+        ToDo todo = toDoService.findToDoById(id);
+        modelMap.put("todo",todo);
+        return "todo";
+    }
+
+    @PostMapping("/update-todo")
+    public String updateToDo(@Valid @ModelAttribute("todo") ToDo toDo, BindingResult result, ModelMap modelMap) {
+        LOGGER.info(String.valueOf(result));
+        if (result.hasErrors()) {
+            return "todo";
+        }
+        String username = (String) modelMap.get("name");
+       toDoService.updateTodo(toDo);
         return "redirect:list-todos";
     }
 

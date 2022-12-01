@@ -10,6 +10,7 @@ public class ToDo {
     private String username;
     @Size(min = 10, message = "Enter atleast 10 characters")
     private String description;
+    @Future(message = "Target date cannot be present or past date")
     private LocalDate targetDate;
     private boolean complete;
 
